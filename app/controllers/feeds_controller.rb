@@ -8,6 +8,7 @@ class FeedsController < ApplicationController
 
  
   def show
+    @favorite = current_user.favorites.find_by(feed_id: @feed.id)
   end
 
 
@@ -30,15 +31,15 @@ class FeedsController < ApplicationController
   def create
     @feed = Feed.new(feed_params)
     @feed.user_id = current_user.id
-    respond_to do |format|
+    if params[:back]
+      render :new
+    else
       if @feed.save
-        format.html { redirect_to feed_url(@feed), notice: "Feed was successfully created." }
-        format.json { render :show, status: :created, location: @feed }
+        redirect_to feeds_path, notice: "画像を投稿しました！"
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @feed.errors, status: :unprocessable_entity }
+        render :new
       end
-    end
+    end 
   end
 
 
@@ -72,6 +73,6 @@ class FeedsController < ApplicationController
 
   
     def feed_params
-      params.require(:feed).permit(:image, :image_cache, :user_id)
+      params.require(:feed).permit(:image, :image_cache, :user_id, :content)
     end
 end
