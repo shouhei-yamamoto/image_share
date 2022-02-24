@@ -26,6 +26,8 @@ gem 'bcrypt'
 
 gem 'rexml'
 
+gem 'faker'
+
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
