@@ -25,9 +25,6 @@ class FeedsController < ApplicationController
     @feed.user_id = current_user.id
   end
 
-  def edit
-  end
-
   def create
     @feed = Feed.new(feed_params)
     @feed.user_id = current_user.id
@@ -35,6 +32,7 @@ class FeedsController < ApplicationController
       render :new
     else
       if @feed.save
+        UserMailer.user_mail(@feed.user).deliver
         redirect_to feeds_path, notice: "画像を投稿しました！"
       else
         render :new
@@ -55,15 +53,17 @@ class FeedsController < ApplicationController
     end
   end
 
- 
+  def edit
+  end
+
   def destroy
     @feed.destroy
-
-    respond_to do |format|
-      format.html { redirect_to feeds_url, notice: "Feed was successfully destroyed." }
-      format.json { head :no_content }
-    end
+      respond_to do |format|
+        format.html { redirect_to feeds_url, notice: "Feed was successfully destroyed." }
+        format.json { head :no_content }
+      end
   end
+  
 
   private
   

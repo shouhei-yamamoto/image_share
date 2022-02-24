@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<%= flash[:warning] %>
 
 <h1>Feeds</h1>
 
@@ -17,8 +18,10 @@
         <td><%= feed.content %></td>
         <td><%= feed.user.name %></td>
         <td><%= link_to 'Show', feed %></td>
-        <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-        <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if feed.user == current_user %>
+          <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
+          <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
