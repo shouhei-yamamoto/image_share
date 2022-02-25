@@ -3,17 +3,19 @@
 
 <h1>Feeds</h1>
 
-<table>
+<table alogn = "center">
   <thead>
     <tr>
       <th>Image</th>
+      <th>コメント</th>
+      <th>ユーザー名</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @feeds.each do |feed| %>
-      <tr>
+      <tr class = "box">
         <td><%= image_tag feed.image.url %></td>
         <td><%= feed.content %></td>
         <td><%= feed.user.name %></td>
