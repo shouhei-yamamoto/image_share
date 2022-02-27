@@ -4,8 +4,20 @@
 
 
 tr {
-  width:1000px;
   border: 100px solid greenyellow;
   box-sizing: initial;
   background-color: #ccc; 
+}
+
+.image{
+  width: 300px;
+  height: 200px;
+}
+
+.header{
+  background-color: greenyellow;
+}
+
+footer{
+  background-color: greenyellow;
 }

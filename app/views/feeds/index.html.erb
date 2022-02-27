@@ -1,9 +1,10 @@
+
 <p id="notice"><%= notice %></p>
 <%= flash[:warning] %>
 
-<h1>Feeds</h1>
+<h1 class = "header">Feeds</h1>
 
-<table alogn = "center">
+<table align = "center">
   <thead>
     <tr>
       <th>Image</th>
@@ -15,8 +16,8 @@
 
   <tbody>
     <% @feeds.each do |feed| %>
-      <tr class = "box">
-        <td><%= image_tag feed.image.url %></td>
+      <tr>
+        <td class = "image"><%= image_tag feed.image.url %></td>
         <td><%= feed.content %></td>
         <td><%= feed.user.name %></td>
         <td><%= link_to 'Show', feed %></td>
@@ -31,4 +32,6 @@
 
 <br>
 
+<footer>
 <%= link_to 'New Feed', new_feed_path %>
+</footer>
