@@ -1,5 +1,6 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: %i[ show edit update destroy ]
+  before_action :check_user, only: [:edit, :update, :destroy]
 
   
   def index
@@ -71,8 +72,16 @@ class FeedsController < ApplicationController
     @feed = Feed.find(params[:id])
   end
 
+  def check_user
+    @feed = Feed.find(params[:id])
+    if @feed.user_id != current_user.id
+      flash[:danger] = "編集権限がありません!"
+      redirect_to feeds_path
+    end
+  end
 
   def feed_params
     params.require(:feed).permit(:image, :image_cache, :user_id, :content)
   end
+
 end

@@ -13,5 +13,8 @@
   <% end %>
 <% end %>
 
-<%= link_to 'Edit', edit_feed_path(@feed) %> |
+
+<% if @user == current_user  %>
+  <%= link_to 'Edit', edit_user_path(@user) %> 
+<% end %>
 <%= link_to 'Back', feeds_path %>
